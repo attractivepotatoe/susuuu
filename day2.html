@@ -5,14 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day 2 Surprise</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(to top left, #ffb6c1, #ff99cc);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            margin: 60px auto;
+            padding: 30px;
+            max-width: 600px;
+            background: #fff0f6;
+            border-radius: 20px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            border: 3px solid #d63384;
+            position: relative;
+        }
+        h1 {
+            font-size: 40px;
+            color: #ff69b4;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+        }
+        .password-box {
+            margin: 20px 0;
+            padding: 15px;
+            background: #ffe4e1;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input[type="password"] {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .submit-btn {
+            padding: 10px 20px;
+            background: #ff85b3;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background: #ff1493;
+            box-shadow: 0px 4px 10px rgba(255, 20, 147, 0.8);
+        }
+        .hidden-content {
+            display: none;
+            margin-top: 20px;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 12px 30px;
+            margin-top: 20px;
+            background: #ff85b3;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background: #ff1493;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>🎶 Day 2 Surprise! 🎶</h1>
-        <p>A special playlist to relax and boost your mood!</p>
-        <a href="https://open.spotify.com/playlist/YOUR_PLAYLIST_LINK" target="_blank">🎧 Listen Here!</a>
+        <p>A special playlist to relax and boost your mood :D!!</p>
+        <div class="password-box">
+            <p>Enter Password to Unlock:</p>
+            <input type="password" id="passwordInput" placeholder="Enter Password">
+            <button class="submit-btn" onclick="checkPassword()">Unlock</button>
+        </div>
+        <div class="hidden-content" id="hiddenContent">
+            <a href="https://open.spotify.com/playlist/0RZn3DTcbf5kI1lPYxqKW9?si=ujmA-JdNTXC1mUWMpSK3cw" target="_blank">🎧 Listen Here!</a>
+            <p><strong>Spotify Premium Account, Take it or gay >:(</strong></p>
+            <p>Email: <span style="color: #d63384;">usmasusuusma@gmail.com</span></p>
+            <p>Password: <span style="color: #d63384;">Sandika123@</span></p>
+        </div>
         <br>
         <a href="landing.html" class="back-button">⬅ Go Back</a>
     </div>
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("passwordInput").value;
+            if (password === "Sandika123@") {
+                document.getElementById("hiddenContent").style.display = "block";
+                document.querySelector(".password-box").style.display = "none";
+            } else {
+                alert("Incorrect password! Try again.");
+            }
+        }
+    </script>
 </body>
 </html>
