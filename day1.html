@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1 Surprise</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            margin: 50px auto;
+            padding: 30px;
+            max-width: 600px;
+            background: #fff0f6;
+            border-radius: 20px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            border: 3px solid #d63384;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #ff69b4;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+        }
+
+        .message {
+            font-size: 18px;
+            color: #ff3b5c;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .heart-animation {
+            position: absolute;
+            font-size: 30px;
+            color: #ff69b4;
+            animation: floatHeart 3s infinite ease-in-out;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            50% { transform: translateY(-20px) scale(1.2); opacity: 0.8; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .back-button {
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #ff85b3;
+            color: white;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:hover {
+            background-color: #ff69b4;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="heart-animation" style="top: 20%; left: 30%;">❤️</div>
+    <div class="heart-animation" style="top: 30%; left: 60%;">💖</div>
+    <div class="heart-animation" style="top: 40%; left: 50%;">💕</div>
+
+    <div class="container">
+        <h1>🌸 Day 1 Surprise! 🌸</h1>
+        <p class="message">Heyyyyy Susu :D, I know periods are bad >:C, so here’s a little something. youre strong and amazing :DD 🩷 Take it easy, rest well, and know that I’m always here for you. :3.</p>
+        
+        <img src="flowerdeli.png" alt="Digital Card" style="width: 100%; border-radius: 10px;">
+        <br><br>
+     <img src="berry.png" alt="Digital Card" style="width: 100%; border-radius: 10px;">
+        <br><br>
+<img src="meme.jpg" alt="Digital Card" style="width: 100%; border-radius: 10px;">
+        <br><br>
+<img src="spider.jpg" alt="Digital Card" style="width: 100%; border-radius: 10px;">
+        <br><br>
+
+        <img src="hello.gif" alt="Hello Kitty Hugging Heart" style="width: 200px;">
+        
+        <br><br>
+        <a href="landing.html" class="back-button">⬅ Go Back</a>
+    </div>
+</body>
+</html>

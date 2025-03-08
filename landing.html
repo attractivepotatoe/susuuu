@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Countdown Gift</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(to top left, #ffb6c1, #ff99cc);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            margin: 50px auto;
+            padding: 40px;
+            max-width: 700px;
+            background: #fff0f6;
+            border-radius: 25px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            border: 3px solid #d63384;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 50px;
+            color: #ff69b4;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+        }
+
+        #countdown {
+            font-size: 50px;
+            color: #ff3b5c;
+            font-weight: bold;
+            margin: 20px 0;
+            font-family: 'Lobster', cursive;
+        }
+
+        .final-message {
+            font-size: 28px;
+            color: #ff1493;
+            font-weight: bold;
+            display: none;
+        }
+
+        .open-when {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background: #ffe4e1;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .open-when h2 {
+            color: #ff69b4;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .open-when p {
+            font-size: 16px;
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+
+        .open-when button {
+            display: inline-block;
+            padding: 8px 18px;
+            margin-top: 8px;
+            background: #ff85b3;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .open-when button:hover {
+            background: #ff1493;
+            box-shadow: 0px 4px 10px rgba(255, 20, 147, 0.8);
+        }
+
+        #volume-slider {
+            width: 80%;
+            height: 10px;
+            background: #ff85b3;
+            border-radius: 5px;
+            outline: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            margin: 20px auto;
+            display: block;
+        }
+
+        #play-pause-btn {
+            background: linear-gradient(to top left, #ff7b9d, #ff5b8f);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: block;
+            margin: auto;
+        }
+
+        .open-gallery-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin-top: 20px;
+            background: #ff85b3;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .open-gallery-btn:hover {
+            background: #ff1493;
+            box-shadow: 0px 4px 10px rgba(255, 20, 147, 0.8);
+        }
+
+        /* Soundboard Button */
+        .soundboard-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin-top: 20px;
+            background: #ff85b3;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .soundboard-btn:hover {
+            background: #ff1493;
+            box-shadow: 0px 4px 10px rgba(255, 20, 147, 0.8);
+ .about-button {
+            display: inline-block;
+            padding: 12px 30px;
+            margin-top: 20px;
+            background: #ff85b3;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .about-button:hover {
+            background: #ff1493;
+            box-shadow: 0px 4px 10px rgba(255, 20, 147, 0.8);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+ .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('heart.png') no-repeat center/contain;
+            animation: float 4s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            50% { transform: translateY(-50px) scale(1.2); opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+
+        
+    </style>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="laufey.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <div class="container">
+        <h1>🎀 Special Website :P 🎀</h1>
+        <img src="hello-kitty.png" alt="Hello Kitty" style="width: 150px;">
+        <p id="countdown-text">Next surprise in:</p>
+        <div id="countdown"></div>
+        <div class="final-message" id="final-message">💖 You did it :D !! I'm proud of you :3 !! Your final surprise is here! 💖</div>
+
+        <div class="surprises">
+            <a href="day1.html" class="surprise-link" id="day1" style="display:none;">🌸 Day 1 Surprise! 🌸</a>
+            <a href="day2.html" class="surprise-link" id="day2" style="display:none;">🎶 Day 2 Surprise! 🎶</a>
+            <a href="day3.html" class="surprise-link" id="day3" style="display:none;">🎨 Day 3 Surprise! 🎨</a>
+            <a href="day22.html" class="surprise-link" id="day4" style="display:none;">🔍 Day 4 Surprise! 🔍</a>
+            <a href="day5.html" class="surprise-link" id="day5" style="display:none;">💝 FINAL SURPRISE! 💝</a>
+        </div>
+
+        <label for="volume-slider">Volume Control:</label>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+        <br>
+        <button id="play-pause-btn">Play :D</button>
+        <button class="open-gallery-btn" onclick="location.href='gallery.html'">Open Gallery :P</button>
+
+        <!-- Soundboard Button -->
+        <button class="soundboard-btn" onclick="location.href='soundboard.html'">Soundboard</button>
+    </div>
+<button class="soundboard-btn" onclick="location.href='indexstars.html'">💫 Make a wish :D ✨🌠</button>
+    </div>
+<button class="soundboard-btn" onclick="location.href='comfort.html'">🎀Comfy zoneee🎀</button>
+    </div>
+<button class="soundboard-btn" onclick="location.href='oki.html'">okie ? :D</button>
+    </div>
+<button class="soundboard-btn" onclick="location.href='gift.html'">best gifts fr</button>
+    </div>
+<button class="soundboard-btn" onclick="location.href='sad.html'">are you sad ? :(</button>
+    </div>
+
+ <!-- Heart animations -->
+    <div class="hearts">
+        <div class="heart" style="top: 20%; left: 10%; animation-duration: 3s;"></div>
+        <div class="heart" style="top: 40%; left: 30%; animation-duration: 4s;"></div>
+        <div class="heart" style="top: 60%; left: 50%; animation-duration: 5s;"></div>
+        <div class="heart" style="top: 80%; left: 70%; animation-duration: 3.5s;"></div>
+<div class="heart" style="top: 50%; left: 56%; animation-duration: 3.5s;"></div>
+<div class="heart" style="top: 70%; left: 34%; animation-duration: 3.5s;"></div>
+<div class="heart" style="top: 90%; left: 650%; animation-duration: 3.5s;"></div>
+<div class="heart" style="top: 10%; left: 40%; animation-duration: 3.5s;"></div>
+<div class="heart" style="top: 35%; left: 60%; animation-duration: 3.5s;"></div>
+<div class="heart" style="top: 5%; left: 56%; animation-duration: 3.5s;"></div>
+<div class="heart" style="top: 95%; left: 34%; animation-duration: 3.5s;"></div>
+<div class="heart" style="top: 2%; left: 650%; animation-duration: 3.5s;"></div>
+<div class="heart" style="top: 80%; left: 40%; animation-duration: 3.5s;"></div>
+<div class="heart" style="top: 89%; left: 60%; animation-duration: 3.5s;"></div>
+
+
+
+    </div>
+
+
+
+
+
+
+    <div class="open-when">
+<h2>💗 Tea Time Reminder ☕ Drink some water >:)</h2>
+
+        <h2>💗 Open When... 💗</h2>
+        <p>You're feeling crampy? Click below for a sweet surprise!</p>
+        <button onclick="location.href='open-when-crampy.html'">Open Now</button>
+        <p>You're feeling bored? Click below for a fun surprise!</p>
+        <button onclick="location.href='claw-machine.html'">Open Now</button>
+                <p>You're feeling tired? Click below for a relaxing surprise!</p>
+        <button onclick="location.href='hamster-.html'">Open Now</button>
+                <p>If you want to laugh, click below for a funny surprise!</p>
+        <button onclick="location.href='laugh.html'">Open Now</button>
+    </div>
+<footer>
+        <a href="about.html" class="soundboard-btn">About This Website (it isnt nerdy stuff istg :( )</a>
+    </footer>
+
+    <script>
+       function createTinyHearts() {
+            for (let i = 0; i < 5; i++) { // Generate 5 hearts at a time
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000);
+            }
+        }
+        setInterval(createTinyHearts, 1000);
+        document.addEventListener("DOMContentLoaded", function () {
+            const countdown = document.getElementById("countdown");
+            const countdownText = document.getElementById("countdown-text");
+            const finalMessage = document.getElementById("final-message");
+            const audio = document.getElementById("background-music");
+            const playPauseButton = document.getElementById("play-pause-btn");
+            const volumeSlider = document.getElementById("volume-slider");
+
+            audio.play();
+            playPauseButton.addEventListener("click", function () {
+                if (audio.paused) {
+                    audio.play();
+                    playPauseButton.innerHTML = "Pause :0";
+                } else {
+                    audio.pause();
+                    playPauseButton.innerHTML = "Play :D";
+                }
+            });
+
+            volumeSlider.addEventListener("input", function () {
+                audio.volume = volumeSlider.value;
+            });
+
+            let startDate = new Date("2025-03-08T00:00:00");
+            let now = new Date();
+            let daysPassed = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+
+            // Show the day surprise links for previous days
+            for (let i = 0; i <= daysPassed; i++) {
+                const surpriseButton = document.getElementById(`day${i + 1}`);
+                if (surpriseButton) surpriseButton.style.display = "block";
+            }
+
+            if (daysPassed < 5) {
+                const targetDate = new Date(startDate);
+                targetDate.setDate(targetDate.getDate() + daysPassed + 1);
+
+                // Function to update the countdown
+                function updateCountdown() {
+                    let now = new Date();
+                    let timeRemaining = targetDate - now;
+
+                    if (timeRemaining <= 0) {
+                        clearInterval(timerInterval); // Stop updating when time reaches zero
+                        countdown.style.display = "none";
+                        countdownText.style.display = "none";
+                        finalMessage.style.display = "block";
+                        return;
+                    }
+
+                    let days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                    let hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                    let seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                    countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
+
+                // Update the countdown every second
+                updateCountdown();
+                const timerInterval = setInterval(updateCountdown, 1000);
+            } else {
+                countdown.style.display = "none";
+                countdownText.style.display = "none";
+                finalMessage.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>

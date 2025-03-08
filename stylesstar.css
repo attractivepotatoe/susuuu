@@ -1,0 +1,73 @@
+#night-sky {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+.comfort-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff66b2; /* Baby pink */
+    opacity: 0;
+    text-align: center;
+    transition: opacity 2s ease-in-out;
+    z-index: 1000;
+}
+
+#night-sky .star {
+  --travel: 100vw;
+  --size: 1;
+  --duration: calc(4s + (Math.random() * 4) + "s"); /* Random duration */
+  --delay: calc(Math.random() * 4 + "s"); /* Random delay */
+  position: relative;
+  background: linear-gradient(-45deg, #ff66b2, rgba(255, 105, 180, 0)); /* Baby pink gradient */
+  filter: drop-shadow(0 0 6px #ff66b2); /* Baby pink glow */
+  opacity: 1;
+  width: calc(var(--size) * 2px);
+  height: calc(var(--size) * 100px);
+  transform: rotate(-45deg);
+  animation: shooting-star ease-in-out infinite;
+  animation-duration: var(--duration);
+  animation-delay: var(--delay);
+  top: var(--top);
+  left: var(--left);
+}
+
+#night-sky .star::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: -5px;
+  width: calc(var(--size) * 7px);
+  height: calc(var(--size) * 7px);
+  border: #ff66b2 3.5px solid; /* Baby pink border */
+  background-color: #ff66b2; /* Baby pink background */
+  -webkit-clip-path: polygon(0% 50%, 40% 40%, 50% 0%, 60% 40%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%);
+  clip-path: polygon(0% 50%, 40% 40%, 50% 0%, 60% 40%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%);
+  transform: rotate(45deg);
+}
+
+@keyframes shooting-star {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate(var(--travel), var(--travel)) rotate(-45deg);
+  }
+}

@@ -1,0 +1,97 @@
+body {
+    background-color: #ffe4e1;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+    color: #d63384;
+}
+
+.container {
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 600px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.surprise-link {
+    text-decoration: none;
+    display: block;
+    margin: 10px auto;
+    padding: 15px;
+    background: #ffb6c1;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: none; /* Initially hidden */
+}
+
+.surprise-link:hover {
+    background: #ff69b4;
+}
+
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url('heart.png') no-repeat center/contain;
+    animation: float 4s infinite;
+}
+
+.open-when-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fff0f6;
+    border-radius: 20px;
+    border: 3px solid #d63384;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.open-when-section h2 {
+    color: #ff69b4;
+    font-size: 28px;
+    text-align: center;
+}
+
+.open-when-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.open-when-card {
+    background: #ffb6c1;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.open-when-card:hover {
+    transform: scale(1.1);
+    background: #ff69b4;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-50px) scale(1.2); opacity: 0.8; }
+    100% { transform: translateY(-100px) scale(1); opacity: 0; }
+}

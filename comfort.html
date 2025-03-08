@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comfort Zone 🍦</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(145deg, #F8BBD0, #FCE4EC);
+            color: #333;
+            text-align: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Dispenser Machine */
+        .dispenser-machine {
+            width: 260px;
+            height: 250px;
+            background-color: #F1C6D9;
+            border-radius: 15px;
+            position: relative;
+            margin: 50px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Funnel */
+        .funnel {
+            width: 0;
+            height: 0;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-top: 50px solid #C48C8C;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Nozzle */
+        .nozzle {
+            width: 40px;
+            height: 30px;
+            background-color: #E57373;
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
+
+        /* Flavor Buttons */
+        .flavor-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .flavor-btn {
+            padding: 12px 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
+            font-size: 18px;
+            background-color: #FFB6C1;
+            transition: background-color 0.3s ease;
+        }
+
+        .flavor-btn:hover {
+            background-color: #FF66B2;
+        }
+
+        /* Ice Cream Container */
+        .ice-cream-container {
+            margin-top: 20px;
+            position: relative;
+            height: 250px;
+        }
+
+        /* Ice Cream Scoop */
+        .ice-cream {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            transition: all 0.3s ease-in-out;
+            width: 150px; /* Ensure the ice cream scoop is appropriately sized */
+            height: 150px;
+        }
+
+        .ice-cream-enlarged {
+            transition: all 0.5s ease-in-out;
+            transform: translateX(-50%) scale(1.5);
+        }
+
+        /* Action Buttons: "Eat :P" and "Together :D" */
+        .action-btns {
+            margin-top: 20px;
+            display: none;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .eat-btn, .together-btn {
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #FF80AB;
+        }
+
+        .eat-btn:hover {
+            background-color: #FF66B2;
+        }
+
+        .together-btn:hover {
+            background-color: #FF3385;
+        }
+
+        /* Photo Frame (Popup) */
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            border: 10px solid #FF80AB;
+            display: none;
+            margin: 30px auto;
+            padding: 10px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            display: none;
+
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🍦 Welcome to Your Comfort Zone 🍦</h1>
+        <p>Choose your favorite ice cream flavor and get a sweet treat!</p>
+
+        <!-- Dispenser Machine -->
+        <div class="dispenser-machine">
+            <!-- Funnel -->
+            <div class="funnel"></div>
+
+
+            <!-- Nozzle -->
+            <div class="nozzle"></div>
+
+            <!-- Ice Cream Scoop Container -->
+            <div id="ice-cream-container" class="ice-cream-container"></div>
+
+        </div>
+
+        <!-- Flavor Selection Buttons -->
+        <div class="flavor-btns">
+            <button class="flavor-btn" onclick="selectIceCream('chocolate')">🍫 Chocolate</button>
+            <button class="flavor-btn" onclick="selectIceCream('vanilla')">🍦 Vanilla</button>
+            <button class="flavor-btn" onclick="selectIceCream('strawberry')">🍓 Strawberry</button>
+        </div>
+
+        <!-- Action Buttons: "Eat :P" and "Together :D" -->
+        <div class="action-btns" id="actionBtns">
+            <button class="eat-btn" id="eatBtn" onclick="eatIceCream()">Eat :P</button>
+            <button class="together-btn" id="togetherBtn" onclick="showPhotoFrame()">Together :D</button>
+        </div>
+
+        <!-- Photo Frame -->
+        <div class="photo-frame" id="photoFrame">
+            <img src="helloicecream.png" alt="Ice Cream Photo">
+            <button class="home-btn" onclick="closePopup()">Go Back</button>
+        </div>
+
+        <!-- Overlay (for popup effect) -->
+        <div id="overlay" class="overlay"></div>
+
+        <!-- Back Button -->
+        <button class="together-btn" onclick="location.href='landing.html'">Back to Home 🏡</button>
+    </div>
+    <script>
+        // Variables for ice cream selection and buttons
+        let selectedIceCream = null;
+        let actionBtns = document.getElementById("actionBtns");
+        let eatBtn = document.getElementById("eatBtn");
+        let togetherBtn = document.getElementById("togetherBtn");
+        let photoFrame = document.getElementById("photoFrame");
+        let overlay = document.getElementById("overlay");
+
+        // Audio for the ice cream dispenser
+        const iceCreamAudio = new Audio('nomnom.m4a'); // Make sure this file is in your project folder
+
+        // Function to play sound when selecting a flavor
+        function playSound() {
+            iceCreamAudio.play();
+        }
+
+        // Function to display and enlarge the selected ice cream scoop
+        function selectIceCream(flavor) {
+            // Clear any existing ice cream
+            const container = document.getElementById("ice-cream-container");
+            container.innerHTML = '';
+
+            // Create new ice cream scoop element
+            const iceCream = document.createElement('img');
+            iceCream.classList.add('ice-cream');
+
+            // Set the image source based on the selected flavor
+            if (flavor === 'chocolate') {
+                iceCream.src = "chocolate.png";  // Ensure the image path is correct
+            } else if (flavor === 'vanilla') {
+                iceCream.src = "vanilla.png";  // Ensure the image path is correct
+            } else if (flavor === 'strawberry') {
+                iceCream.src = "strawberry.png";  // Ensure the image path is correct
+            }
+
+            // Add the selected flavor's scoop and show it
+            container.appendChild(iceCream);
+
+            // Show and enlarge the ice cream scoop smoothly
+            iceCream.style.display = 'block';
+            setTimeout(() => {
+                iceCream.classList.add('ice-cream-enlarged');
+            }, 10);
+
+            // Play sound when a flavor is selected
+            playSound();
+
+            // Show action buttons
+            actionBtns.style.display = 'flex';
+            selectedIceCream = iceCream;
+
+            // Show the "Eat" button again when selecting a new flavor
+            eatBtn.style.display = 'inline-block';
+            togetherBtn.style.display = 'none';  // Hide "Together" button
+        }
+
+        // Function to "eat" the ice cream
+        function eatIceCream() {
+            if (selectedIceCream) {
+                selectedIceCream.style.display = 'none';
+            }
+            eatBtn.style.display = 'none';  // Hide the "Eat" button
+            togetherBtn.style.display = 'block';  // Show the "Together" button
+        }
+
+        // Show the "Together :D" photo frame
+        function showPhotoFrame() {
+            photoFrame.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        // Close the popup
+        function closePopup() {
+            photoFrame.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

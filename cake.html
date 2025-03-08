@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cut the Cake 🎂💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to top left, #ffc6dc, #ffb6c1);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 40px;
+            margin-top: 30px;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+        }
+
+        /* Full Cake */
+        .cake {
+            width: 220px;
+            height: 130px;
+            background: #ff85b3;
+            position: relative;
+            margin: 50px auto;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Layers */
+        .layer {
+            width: 220px;
+            height: 25px;
+            background: #ffb6c1;
+            position: absolute;
+            bottom: 0;
+        }
+
+        /* Frosting */
+        .frosting {
+            width: 240px;
+            height: 40px;
+            background: white;
+            position: absolute;
+            top: -15px;
+            left: -10px;
+            border-radius: 50%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Candle */
+        .candle {
+            width: 12px;
+            height: 50px;
+            background: #ff4e50;
+            position: absolute;
+            top: -55px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        /* Flame */
+        .flame {
+            width: 15px;
+            height: 25px;
+            background: orange;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            animation: flicker 0.5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); }
+            100% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        /* Knife */
+        .knife {
+            width: 100px;
+            height: 10px;
+            background: silver;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            cursor: grab;
+            border-radius: 3px;
+        }
+
+        /* Knife Handle */
+        .knife::before {
+            content: "";
+            width: 20px;
+            height: 30px;
+            background: brown;
+            position: absolute;
+            left: -10px;
+            bottom: -10px;
+            border-radius: 5px;
+        }
+
+        /* Thank You Message */
+        #thank-you {
+            font-size: 24px;
+            color: #ff1493;
+            display: none;
+            margin-top: 20px;
+            animation: pop 0.5s ease-in-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            color: #ff85b3;
+            font-size: 24px;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        /* Half-Cut Cake */
+        .half-cake {
+            width: 100px;
+            height: 130px;
+            background: #ff85b3;
+            position: relative;
+            margin: 50px auto;
+            border-radius: 10px 10px 0 0;
+            display: none;
+        }
+
+        .half-layer {
+            width: 100px;
+            height: 25px;
+            background: #ffb6c1;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .half-frosting {
+            width: 110px;
+            height: 40px;
+            background: white;
+            position: absolute;
+            top: -15px;
+            left: -5px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🎂 Cut the Cake! 💖</h1>
+
+<!-- Full Cake -->
+<div class="cake" id="full-cake">
+    <div class="frosting"></div>
+    <div class="candle">
+        <div class="flame"></div>
+    </div>
+    <div class="layer"></div>
+</div>
+
+<!-- Half Cake (Hidden Initially) -->
+<div class="half-cake" id="half-cake">
+    <div class="half-frosting"></div>
+    <div class="half-layer"></div>
+</div>
+
+<!-- Draggable Knife -->
+<div class="knife" id="knife"></div>
+
+<p id="thank-you">💖 You cut the cake! Thank you for being amazing! 💖</p>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const fullCake = document.getElementById("full-cake");
+        const halfCake = document.getElementById("half-cake");
+        const knife = document.getElementById("knife");
+        const message = document.getElementById("thank-you");
+
+        // Make the knife draggable
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        knife.addEventListener("mousedown", function (e) {
+            isDragging = true;
+            offsetX = e.clientX - knife.getBoundingClientRect().left;
+            offsetY = e.clientY - knife.getBoundingClientRect().top;
+            knife.style.cursor = "grabbing";
+        });
+
+        document.addEventListener("mousemove", function (e) {
+            if (isDragging) {
+                knife.style.left = e.clientX - offsetX + "px";
+                knife.style.top = e.clientY - offsetY + "px";
+            }
+        });
+
+        document.addEventListener("mouseup", function () {
+            isDragging = false;
+            knife.style.cursor = "grab";
+
+            // Check if knife is near the cake to "cut" it
+            let knifeRect = knife.getBoundingClientRect();
+            let cakeRect = fullCake.getBoundingClientRect();
+
+            if (
+                knifeRect.left < cakeRect.right &&
+                knifeRect.right > cakeRect.left &&
+                knifeRect.top < cakeRect.bottom &&
+                knifeRect.bottom > cakeRect.top
+            ) {
+                cutCake();
+            }
+        });
+
+        function cutCake() {
+            fullCake.style.display = "none"; // Hide full cake
+            halfCake.style.display = "block"; // Show half cake
+            message.style.display = "block"; // Show thank-you message
+            knife.style.display = "none"; // Hide knife
+            createHearts();
+        }
+    });
+</script>
+
+</body>
+</html>

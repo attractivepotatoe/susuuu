@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀 Gallery 🎀</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(to top left, #ffb6c1, #ff99cc);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            margin: 50px auto;
+            padding: 40px;
+            max-width: 700px;
+            background: #fff0f6;
+            border-radius: 25px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            border: 3px solid #d63384;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #ff69b4;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid #ff69b4;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide {
+            display: none;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 10px 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            background: rgba(255, 20, 147, 0.7);
+            border-radius: 10px;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        .prev:hover, .next:hover {
+            background: #ff1493;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff85b3;
+            font-size: 24px;
+            animation: float 4s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 25px;
+            margin-top: 20px;
+            background: #ff85b3;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .back-button:hover {
+            background: #ff1493;
+            box-shadow: 0px 4px 10px rgba(255, 20, 147, 0.8);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1> Gallery 🎥</h1>
+        <p>Enjoy these moments again :P</p>
+
+        <div class="slideshow-container">
+            <div class="slide">
+                <video controls autoplay muted>
+                    <source src="video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="slide">
+                <video controls muted>
+                    <source src="day1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="slide">
+                <video controls muted>
+                    <source src="day2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="slide">
+                <video controls muted>
+                    <source src="day3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="slide">
+                <video controls muted>
+                    <source src="day4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="slide">
+                <video controls muted>
+                    <source src="laufey.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+<div class="slide">
+                <video controls muted>
+                    <source src="moonlight.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+
+
+            <button class="prev" onclick="changeSlide(-1)">❮</button>
+            <button class="next" onclick="changeSlide(1)">❯</button>
+        </div>
+
+        <a href="landing.html" class="back-button">🏠 Back to Home</a>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        let slides = document.getElementsByClassName("slide");
+
+        function showSlide(n) {
+            if (n >= slides.length) { slideIndex = 0; }
+            if (n < 0) { slideIndex = slides.length - 1; }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex].style.display = "block";
+            slides[slideIndex].querySelector("video").play();
+        }
+
+        function changeSlide(n) {
+            slides[slideIndex].querySelector("video").pause();
+            showSlide(slideIndex += n);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            showSlide(slideIndex);
+        });
+    </script>
+
+</body>
+</html>

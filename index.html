@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Your Mystery Gift</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #f8f0f7; /* Soft pastel background */
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: #d63384; /* Pretty pink text */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 60px;
+            color: #ff69b4;
+            margin-top: 20%;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .enter-button {
+            background-color: #ff69b4;
+            padding: 20px 40px;
+            font-size: 30px;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 50px;
+            transition: 0.3s;
+        }
+
+        .enter-button:hover {
+            background-color: #ff3b5c;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('heart.png') no-repeat center/contain;
+            animation: float 4s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            50% { transform: translateY(-50px) scale(1.2); opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Heart animations -->
+    <div class="hearts">
+        <div class="heart" style="top: 20%; left: 10%; animation-duration: 3s;"></div>
+        <div class="heart" style="top: 40%; left: 30%; animation-duration: 4s;"></div>
+        <div class="heart" style="top: 60%; left: 50%; animation-duration: 5s;"></div>
+        <div class="heart" style="top: 80%; left: 70%; animation-duration: 3.5s;"></div>
+    </div>
+
+    <h1>Hey Susu :D, Click On Me to Enter C:</h1>
+    <a href="landing.html" class="enter-button">Enter</a>
+</body>
+</html>
