@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue? ✨</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #ffe4f2;
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #startButton {
+            position: absolute;
+            top: 50vh;
+            left: 50vw;
+            transform: translate(-50%, -50%);
+            padding: 20px 40px;
+            font-size: 24px;
+            border: none;
+            border-radius: 30px;
+            background-color: #ff99cc;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .lyric-image {
+            position: absolute;
+            width: 220px;
+            opacity: 0;
+            transition: opacity 1s ease, transform 1s ease;
+            cursor: pointer;
+        }
+
+        #mainImage {
+            position: absolute;
+            top: 50vh;
+            left: 50vw;
+            transform: translate(-50%, -50%) scale(1);
+            width: 300px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        #instruction {
+            position: fixed;
+            top: 20px;
+            left: 50vw;
+            transform: translateX(-50%);
+            font-size: 40px;
+            color: #d63384;
+            opacity: 0;
+            transition: opacity 2s;
+            z-index: 10;
+        }
+
+        .audio-container {
+            display: none;
+        }
+
+        .page-wrapper {
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <button id="startButton">blue?</button>
+        <audio id="mainMusic" preload="auto">
+            <source src="blue.mp3" type="audio/mpeg">
+        </audio>
+
+        <div id="instruction">  eeee   :3 </div>
+        <img id="mainImage" src="blue.jpg" alt="Main Lyrics">
+<img src="messi.jpg" alt="Digital Card" style="width: 50%; border-radius: 10px;">
+<img src="susu1.jpg" alt="Digital Card" style="width: 50%; border-radius: 10px;">
+<img src="susu2.png" alt="Digital Card" style="width: 50%; border-radius: 10px;">
+<img src="susu3.png" alt="Digital Card" style="width: 50%; border-radius: 10px;">
+
+
+
+        <!-- Individual audio players for each image -->
+        <div class="audio-container">
+            <audio id="audio1"><source src="so1231ng1.mp3" type="audio/mpeg"></audio>
+            <audio id="audio2"><source src="son1231g2.mp3" type="audio/mpeg"></audio>
+            <audio id="audio3"><source src="son4213g3.mp3" type="audio/mpeg"></audio>
+            <audio id="audio4"><source src="so123ng4.mp3" type="audio/mpeg"></audio>
+            <audio id="audio5"><source src="son4213g5.mp3" type="audio/mpeg"></audio>
+            <audio id="audio6"><source src="son1231g6.mp3" type="audio/mpeg"></audio>
+            <audio id="audio7"><source src="son432g7.mp3" type="audio/mpeg"></audio>
+            <audio id="audio8"><source src="song11238.mp3" type="audio/mpeg"></audio>
+            <audio id="audio9"><source src="so1231ng9.mp3" type="audio/mpeg"></audio>
+            <audio id="audio10"><source src="song123110.mp3" type="audio/mpeg"></audio>
+        </div>
+    </div>
+
+    <script>
+        const startButton = document.getElementById("startButton");
+        const mainMusic = document.getElementById("mainMusic");
+        const mainImage = document.getElementById("mainImage");
+        const instruction = document.getElementById("instruction");
+
+        const fixedPositions = [
+            { top: '100px', left: '50px' },
+            { top: '150px', left: '300px' },
+            { top: '250px', left: '100px' },
+            { top: '350px', left: '350px' },
+            { top: '450px', left: '200px' },
+            { top: '600px', left: '50px' },
+            { top: '700px', left: '300px' },
+            { top: '800px', left: '100px' },
+            { top: '900px', left: '350px' },
+            { top: '1000px', left: '200px' },
+        ];
+
+        startButton.addEventListener("click", () => {
+            mainMusic.play().catch(() => {});
+            mainImage.style.opacity = 1;
+            instruction.style.opacity = 1;
+            startButton.style.display = 'none';
+
+            // Display lyric images in fixed scattered positions
+            for (let i = 1; i <= 10; i++) {
+                const img = document.createElement("img");
+                img.src = `lyric${i}.jpg`;
+                img.classList.add("lyric-image");
+                img.style.top = fixedPositions[i - 1].top;
+                img.style.left = fixedPositions[i - 1].left;
+
+                img.onclick = () => {
+                    const sound = document.getElementById(`audio${i}`);
+                    if (sound) {
+                        sound.currentTime = 0;
+                        sound.play();
+                    }
+                };
+
+                document.body.appendChild(img);
+                setTimeout(() => img.style.opacity = 1, i * 300);
+            }
+        });
+    </script>
+</body>
+</html>
