@@ -1,296 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎨 Draw with Me</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Pacifico&family=Caveat&family=Indie+Flower&family=Cookie&family=Shadows+Into+Light&family=Amatic+SC&family=Patrick+Hand&family=Fredericka+the+Great&family=Coming+Soon&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Quicksand', sans-serif;
-            background-color: #fff0f7;
-            color: #6c2c6c;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
-            justify-content: center;
-        }
-        .controls label {
-            font-size: 0.9rem;
-        }
-        .canvas-container {
-            border: 8px double #ff99cc;
-            border-radius: 20px;
-            background: white;
-            padding: 10px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        canvas {
-            background-color: white;
-            border-radius: 10px;
-        }
-        button {
-            padding: 8px 16px;
-            border: none;
-            background-color: #ff88bb;
-            color: white;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 2px 2px 6px #d87aa4;
-        }
-        button:hover {
-            background-color: #ff66aa;
-        }
-        .frame-select {
-            margin-bottom: 10px;
-        }
-        #downloadBtn {
-            background-color: #aa77ff;
-            box-shadow: 2px 2px 6px #9876c2;
-        }
-        #downloadBtn:hover {
-            background-color: #9359ff;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎨 Draw with Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Pacifico&family=Caveat&family=Indie+Flower&family=Cookie&family=Shadows+Into+Light&family=Amatic+SC&family=Patrick+Hand&family=Fredericka+the+Great&family=Coming+Soon&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-color: #fff0f7;
+      color: #6c2c6c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5rem;
+      color: #cc5fa4;
+      margin-bottom: 15px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .controls label, .controls select, .controls input {
+      font-size: 0.9rem;
+    }
+    .canvas-container {
+      border: 8px double #ff99cc;
+      border-radius: 20px;
+      background: white;
+      padding: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(255, 153, 204, 0.3);
+    }
+    canvas {
+      background-color: white;
+      border-radius: 10px;
+      touch-action: none;
+    }
+    button {
+      padding: 10px 18px;
+      border: none;
+      background-color: #ff88bb;
+      color: white;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 2px 2px 6px #d87aa4;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff66aa;
+      transform: scale(1.05);
+    }
+    #downloadBtn {
+      background-color: #aa77ff;
+      box-shadow: 2px 2px 6px #9876c2;
+    }
+    #downloadBtn:hover {
+      background-color: #9359ff;
+    }
+    .section-title {
+      font-family: 'Shadows Into Light', cursive;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+  </style>
 </head>
 <body>
-    <h1>🎀 Draw with Me 🎀</h1>
-    <audio id="bgMusic" loop>
-        <source src="twice.mp3" type="audio/mpeg">
-    </audio>
-    <div class="controls">
-        <label>Tool:
-            <select id="tool">
-                <option value="brush">Brush</option>
-                <option value="pencil">Pencil</option>
-                <option value="spray">Spray</option>
-                <option value="eraser">Eraser</option>
-                <option value="text">Text</option>
-                <option value="shape">Shape</option>
-                <option value="sticker">Sticker</option>
-            </select>
-        </label>
-        <label>Color:
-            <input type="color" id="colorPicker" value="#6c2c6c">
-        </label>
-        <label>Size:
-            <input type="range" id="brushSize" min="1" max="30" value="5">
-        </label>
-        <label>Font:
-            <select id="fontPicker">
-                <option value="Quicksand">Quicksand</option>
-                <option value="Pacifico">Pacifico</option>
-                <option value="Caveat">Caveat</option>
-                <option value="Indie Flower">Indie Flower</option>
-                <option value="Cookie">Cookie</option>
-                <option value="Shadows Into Light">Shadows Into Light</option>
-                <option value="Amatic SC">Amatic SC</option>
-                <option value="Patrick Hand">Patrick Hand</option>
-                <option value="Fredericka the Great">Fredericka the Great</option>
-                <option value="Coming Soon">Coming Soon</option>
-            </select>
-        </label>
-        <label id="stickerOptions" style="display:none;">
-            Sticker:
-            <select id="stickerSelect">
-                <option value="sticker1.png">💖 Heart</option>
-                <option value="sticker2.png">🌸 Flower</option>
-                <option value="sticker3.png">🐻 Bear</option>
-            </select>
-        </label>
-    </div>
+  <h1>🎀 Draw with Me 🎀</h1>
 
-    <div class="canvas-container">
-        <canvas id="drawingCanvas" width="400" height="500"></canvas>
-    </div>
+  <audio id="bgMusic" loop>
+    <source src="twice.mp3" type="audio/mpeg">
+  </audio>
 
-    <div class="controls">
-        <button onclick="clearCanvas()">🧼 Clear</button>
-        <button onclick="sendDrawing()">💌 Send</button>
-        <button onclick="downloadDrawing()" id="downloadBtn">⬇ Download</button>
-        <button onclick="goBack()">⬅ Go Back</button>
-        <button onclick="toggleMusic()">🎵 Toggle Music</button>
-        <button onclick="undo()">↩ Undo</button>
-        <button onclick="redo()">↪ Redo</button>
-    </div>
+  <div class="controls">
+    <label class="section-title">Tool:</label>
+    <select id="tool">
+      <option value="brush">Brush</option>
+      <option value="pencil">Pencil</option>
+      <option value="spray">Spray</option>
+      <option value="eraser">Eraser</option>
+      <option value="text">Text</option>
+      <option value="shape">Shape</option>
+      <option value="sticker">Sticker</option>
+    </select>
 
-    <script>
-        const canvas = document.getElementById('drawingCanvas');
-        const ctx = canvas.getContext('2d');
-        const toolSelect = document.getElementById('tool');
-        const colorPicker = document.getElementById('colorPicker');
-        const brushSize = document.getElementById('brushSize');
-        const fontPicker = document.getElementById('fontPicker');
-        const music = document.getElementById('bgMusic');
-        const stickerOptions = document.getElementById('stickerOptions');
-        const stickerSelect = document.getElementById('stickerSelect');
+    <label class="section-title">Color:</label>
+    <input type="color" id="colorPicker" value="#6c2c6c">
 
-        ctx.fillStyle = 'white';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    <label class="section-title">Size:</label>
+    <input type="range" id="brushSize" min="1" max="30" value="5">
 
-        let painting = false;
-        let actions = [];
-        let redoStack = [];
+    <label class="section-title">Font:</label>
+    <select id="fontPicker">
+      <option value="Quicksand">Quicksand</option>
+      <option value="Pacifico">Pacifico</option>
+      <option value="Caveat">Caveat</option>
+      <option value="Indie Flower">Indie Flower</option>
+      <option value="Cookie">Cookie</option>
+      <option value="Shadows Into Light">Shadows Into Light</option>
+      <option value="Amatic SC">Amatic SC</option>
+      <option value="Patrick Hand">Patrick Hand</option>
+      <option value="Fredericka the Great">Fredericka the Great</option>
+      <option value="Coming Soon">Coming Soon</option>
+    </select>
 
-        toolSelect.addEventListener('change', () => {
-            stickerOptions.style.display = toolSelect.value === 'sticker' ? 'inline-block' : 'none';
-        });
+    <label id="stickerOptions" style="display:none;">
+      Sticker:
+      <select id="stickerSelect">
+        <option value="sticker1.png">💖 Heart</option>
+        <option value="sticker2.png">🌸 Flower</option>
+        <option value="sticker3.png">🐻 Bear</option>
+      </select>
+    </label>
+  </div>
 
-        function startPosition(e) {
-            const tool = toolSelect.value;
-            const x = e.offsetX;
-            const y = e.offsetY;
+  <div class="canvas-container">
+    <canvas id="drawingCanvas" width="400" height="500"></canvas>
+  </div>
 
-            if (tool === 'text') {
-                const text = prompt("Enter your cute note:");
-                if (text) {
-                    ctx.font = `${brushSize.value * 3}px '${fontPicker.value}'`;
-                    ctx.fillStyle = colorPicker.value;
-                    ctx.fillText(text, x, y);
-                    saveState();
-                }
-                return;
-            }
+  <div class="controls">
+    <button onclick="clearCanvas()">🧼 Clear</button>
+    <button onclick="sendDrawing()">💌 Send</button>
+    <button onclick="downloadDrawing()" id="downloadBtn">⬇ Download</button>
+    <button onclick="goBack()">⬅ Go Back</button>
+    <button onclick="toggleMusic()">🎵 Toggle Music</button>
+    <button onclick="undo()">↩ Undo</button>
+    <button onclick="redo()">↪ Redo</button>
+  </div>
 
-            if (tool === 'shape') {
-                ctx.fillStyle = colorPicker.value;
-                ctx.beginPath();
-                ctx.arc(x, y, brushSize.value * 2, 0, 2 * Math.PI);
-                ctx.fill();
-                saveState();
-                return;
-            }
+  <script>
+    const canvas = document.getElementById('drawingCanvas');
+    const ctx = canvas.getContext('2d');
+    const toolSelect = document.getElementById('tool');
+    const colorPicker = document.getElementById('colorPicker');
+    const brushSize = document.getElementById('brushSize');
+    const fontPicker = document.getElementById('fontPicker');
+    const music = document.getElementById('bgMusic');
+    const stickerOptions = document.getElementById('stickerOptions');
+    const stickerSelect = document.getElementById('stickerSelect');
 
-            if (tool === 'sticker') {
-                const img = new Image();
-                img.src = stickerSelect.value;
-                img.onload = function () {
-                    ctx.drawImage(img, x - 20, y - 20, 40, 40);
-                    saveState();
-                }
-                return;
-            }
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            painting = true;
-            draw(e);
+    let painting = false;
+    let actions = [];
+    let redoStack = [];
+
+    toolSelect.addEventListener('change', () => {
+      stickerOptions.style.display = toolSelect.value === 'sticker' ? 'inline-block' : 'none';
+    });
+
+    function getPos(e) {
+      if (e.touches && e.touches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+          x: e.touches[0].clientX - rect.left,
+          y: e.touches[0].clientY - rect.top
+        };
+      }
+      return { x: e.offsetX, y: e.offsetY };
+    }
+
+    function startPosition(e) {
+      const { x, y } = getPos(e);
+      const tool = toolSelect.value;
+
+      if (tool === 'text') {
+        const text = prompt("Enter your cute note:");
+        if (text) {
+          ctx.font = `${parseInt(brushSize.value) * 3}px '${fontPicker.value}'`;
+          ctx.fillStyle = colorPicker.value;
+          ctx.fillText(text, x, y);
+          saveState();
         }
+        return;
+      }
 
-        function endPosition() {
-            painting = false;
-            ctx.beginPath();
-            saveState();
-        }
-
-        function draw(e) {
-            if (!painting || ['text', 'shape', 'sticker'].includes(toolSelect.value)) return;
-
-            const x = e.offsetX;
-            const y = e.offsetY;
-            const tool = toolSelect.value;
-            const size = brushSize.value;
-            const color = tool === 'eraser' ? 'white' : colorPicker.value;
-
-            ctx.lineWidth = size;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = color;
-
-            if (tool === 'spray') {
-                for (let i = 0; i < 10; i++) {
-                    const offsetX = Math.random() * size - size / 2;
-                    const offsetY = Math.random() * size - size / 2;
-                    ctx.beginPath();
-                    ctx.arc(x + offsetX, y + offsetY, 1, 0, Math.PI * 2);
-                    ctx.fillStyle = color;
-                    ctx.fill();
-                }
-            } else {
-                ctx.lineTo(x, y);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(x, y);
-            }
-        }
-
-        function clearCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            saveState();
-        }
-
-        function sendDrawing() {
-            const link = document.createElement('a');
-            link.download = 'drawing_by_you.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        }
-
-        function downloadDrawing() {
-            const link = document.createElement('a');
-            link.download = 'drawing_downloaded.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        }
-
-        function goBack() {
-            window.location.href = 'landing.html';
-        }
-
-        function toggleMusic() {
-            if (music.paused) music.play();
-            else music.pause();
-        }
-
-        function saveState() {
-            actions.push(canvas.toDataURL());
-            if (actions.length > 20) actions.shift();
-            redoStack = [];
-        }
-
-        function undo() {
-            if (actions.length > 0) {
-                redoStack.push(actions.pop());
-                let img = new Image();
-                img.src = actions[actions.length - 1] || '';
-                img.onload = function () {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(img, 0, 0);
-                }
-            }
-        }
-
-        function redo() {
-            if (redoStack.length > 0) {
-                let data = redoStack.pop();
-                actions.push(data);
-                let img = new Image();
-                img.src = data;
-                img.onload = function () {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(img, 0, 0);
-                }
-            }
-        }
-
-        canvas.addEventListener('mousedown', startPosition);
-        canvas.addEventListener('mouseup', endPosition);
-        canvas.addEventListener('mousemove', draw);
-
+      if (tool === 'shape') {
+        ctx.fillStyle = colorPicker.value;
+        ctx.beginPath();
+        ctx.arc(x, y, brushSize.value * 2, 0, 2 * Math.PI);
+        ctx.fill();
         saveState();
-    </script>
+        return;
+      }
+
+      if (tool === 'sticker') {
+        const img = new Image();
+        img.src = stickerSelect.value;
+        img.onload = function () {
+          ctx.drawImage(img, x - 20, y - 20, 40, 40);
+          saveState();
+        }
+        return;
+      }
+
+      painting = true;
+      draw(e);
+    }
+
+    function endPosition() {
+      painting = false;
+      ctx.beginPath();
+      saveState();
+    }
+
+    function draw(e) {
+      if (!painting || ['text', 'shape', 'sticker'].includes(toolSelect.value)) return;
+      const { x, y } = getPos(e);
+      const tool = toolSelect.value;
+      const size = brushSize.value;
+      const color = tool === 'eraser' ? 'white' : colorPicker.value;
+
+      ctx.lineWidth = size;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = color;
+
+      if (tool === 'spray') {
+        for (let i = 0; i < 10; i++) {
+          const offsetX = Math.random() * size - size / 2;
+          const offsetY = Math.random() * size - size / 2;
+          ctx.beginPath();
+          ctx.arc(x + offsetX, y + offsetY, 1, 0, Math.PI * 2);
+          ctx.fillStyle = color;
+          ctx.fill();
+        }
+      } else {
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+      }
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      saveState();
+    }
+
+    function sendDrawing() {
+      const link = document.createElement('a');
+      link.download = 'drawing_by_you.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function downloadDrawing() {
+      const imgData = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = imgData.replace("image/png", "image/octet-stream");
+      a.download = 'drawing_downloaded.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function goBack() {
+      window.location.href = 'landing.html';
+    }
+
+    function toggleMusic() {
+      music.paused ? music.play() : music.pause();
+    }
+
+    function saveState() {
+      actions.push(canvas.toDataURL());
+      if (actions.length > 20) actions.shift();
+      redoStack = [];
+    }
+
+    function undo() {
+      if (actions.length > 1) {
+        redoStack.push(actions.pop());
+        let img = new Image();
+        img.src = actions[actions.length - 1];
+        img.onload = function () {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+        }
+      }
+    }
+
+    function redo() {
+      if (redoStack.length > 0) {
+        let data = redoStack.pop();
+        actions.push(data);
+        let img = new Image();
+        img.src = data;
+        img.onload = function () {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+        }
+      }
+    }
+
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', endPosition);
+    canvas.addEventListener('mousemove', draw);
+
+    canvas.addEventListener('touchstart', e => {
+      e.preventDefault();
+      startPosition(e);
+    }, { passive: false });
+
+    canvas.addEventListener('touchend', endPosition);
+    canvas.addEventListener('touchmove', e => {
+      e.preventDefault();
+      draw(e);
+    }, { passive: false });
+
+    saveState();
+  </script>
 </body>
 </html>
