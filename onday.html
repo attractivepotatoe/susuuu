@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎀 Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Pacifico&family=Amatic+SC&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-color: #fff0f7;
+      color: #6c2c6c;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2rem;
+      font-family: 'Pacifico', cursive;
+      color: #ff66aa;
+      margin-bottom: 10px;
+    }
+    .slideshow-container {
+      position: relative;
+      max-width: 500px;
+      margin: 20px auto;
+      background: #ffe6f2;
+      border-radius: 20px;
+      padding: 10px;
+      box-shadow: 4px 4px 16px rgba(0,0,0,0.1);
+    }
+    .slides {
+      display: none;
+    }
+    .slides img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      border: 4px solid #ff99cc;
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
+    }
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 24px;
+      border-radius: 50%;
+      user-select: none;
+      background-color: #ff88bb;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    }
+    .prev {
+      left: -20px;
+    }
+    .next {
+      right: -20px;
+    }
+    .prev:hover, .next:hover {
+      background-color: #ff66aa;
+    }
+    button {
+      background-color: #ff88bb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 2px 2px 6px #d87aa4;
+    }
+    button:hover {
+      background-color: #ff66aa;
+    }
+    #secretBtn {
+      display: none;
+      background-color: #aa77ff;
+    }
+    #secretBtn:hover {
+      background-color: #9359ff;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff0f7;
+      padding: 20px;
+      border: 4px solid #ff99cc;
+      border-radius: 20px;
+      box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+    }
+    .popup p {
+      font-family: 'Amatic SC', cursive;
+      font-size: 1.5rem;
+      color: #6c2c6c;
+    }
+  </style>
+</head>
+<body>
+  <h1>You're almost there :D I'm so proud of you :3</h1>
+
+  <audio id="galleryMusic" loop>
+    <source src="pair.mp3" type="audio/mpeg">
+  </audio>
+
+  <button onclick="toggleMusic()">🎵 Toggle Music</button>
+  <button onclick="showHint()">💡 Hint</button>
+  <button id="secretBtn" onclick="showPopup()">eeeee</button>
+
+  <div class="slideshow-container">
+    <div class="slides"><img src="monday.png" alt="Cute Image 1"></div>
+    <div class="slides"><img src="tuesday.png" alt="Cute Image 2"></div>
+    <div class="slides"><img src="wed.png" alt="Cute Image 3"></div>
+    <div class="slides"><img src="thurs1.png" alt="Cute Image 4"></div>
+    <div class="slides"><img src="thurs2.png" alt="Cute Image 5"></div>
+  <div class="slides"><img src="worry.png" alt="Cute Image 5"></div>
+  <div class="slides"><img src="thurs3.png" alt="Cute Image 5"></div>
+  <div class="slides"><img src="everyday.png" alt="Cute Image 5"></div>
+  <div class="slides"><img src="barca.png" alt="Cute Image 5"></div>
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+
+  <div class="popup" id="popup">
+    <p>I'm sorry for annoying you Susma, but I just love talking to you. Sorry for being annoying :p.<br>
+    Thank you for making every day better. Talking to you makes my day so much better heheh 💖</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+  <script>
+    let music = document.getElementById('galleryMusic');
+    let secretBtn = document.getElementById('secretBtn');
+    let musicClickCount = 0;
+    let slideIndex = 0;
+    let slides = document.getElementsByClassName('slides');
+
+    function toggleMusic() {
+      musicClickCount++;
+      if (music.paused) music.play();
+      else music.pause();
+
+      if (musicClickCount >= 10) {
+        secretBtn.style.display = 'inline-block';
+      }
+    }
+
+    function showHint() {
+      alert("Hint: Try clicking the music button a few times 😉");
+    }
+
+    function showPopup() {
+      document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function showSlide(n) {
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+      }
+      slides[n].style.display = 'block';
+    }
+
+    function changeSlide(n) {
+      slideIndex += n;
+      if (slideIndex >= slides.length) slideIndex = 0;
+      if (slideIndex < 0) slideIndex = slides.length - 1;
+      showSlide(slideIndex);
+    }
+
+    showSlide(slideIndex);
+  </script>
+</body>
+</html>
